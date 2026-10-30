@@ -1,0 +1,8 @@
+[functions.paysuite-webhook]
+verify_jwt = false
+
+[functions.paysuite-create-payment]
+verify_jwt = false
+
+[functions.validate-desktop-license]
+verify_jwt = false

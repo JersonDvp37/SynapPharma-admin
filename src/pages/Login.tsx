@@ -1,0 +1,10 @@
+import { useState, type FormEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase";
+import styles from "./Auth.module.css";
+
+export function Login() {
+  const navigate = useNavigate(); const [email, setEmail] = useState(""); const [password, setPassword] = useState(""); const [error, setError] = useState(""); const [loading, setLoading] = useState(false);
+  async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setError(""); setLoading(true); const auth = await supabase.auth.signInWithPassword({ email: email.trim().toLowerCase(), password }); if (auth.error || !auth.data.user || !auth.data.user.email) { setLoading(false); setError("Email ou senha invalidos."); return; } const { data: companies, error: companyError } = await supabase.from("companies").select("company_id").eq("admin_email", auth.data.user.email.toLowerCase()).limit(1); setLoading(false); if (companyError) { setError("Nao foi possivel verificar a empresa desta conta."); return; } navigate(companies?.length ? `/admin?company_id=${companies[0].company_id}` : "/onboarding", { replace: true }); }
+  return <main className={styles.page}><section className={styles.card}><div className={styles.brand}>Synap Pharma</div><p className={styles.kicker}>LOGIN</p><h1>Entrar no AdminPharma</h1><p className={styles.description}>Aceda ao painel da sua empresa.</p><form className={styles.form} onSubmit={submit}><label>Email<input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label><label>Senha<input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>{error && <p className={styles.error}>{error}</p>}<button disabled={loading}>{loading ? "A entrar..." : "Entrar"}</button></form><Link to="/register">Criar conta</Link></section></main>;
+}
