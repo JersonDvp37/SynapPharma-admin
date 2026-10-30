@@ -132,11 +132,11 @@ export function Plans() {
           <div className={styles.planTitle}><div><h2>{plan.name}</h2><p>{plan.description}</p></div>{isCurrent && <span className={styles.current}>Atual</span>}</div>
           <strong className={styles.price}>{plan.price}{plan.key !== "PREMIUM" && <small>/mês</small>}</strong>
           <div className={styles.featureList}>{features.map((feature) => <span key={feature}><Check size={15} />{feature}</span>)}</div>
-          {plan.key === "PREMIUM" && !isCurrent ? <a className={styles.secondaryButton} href={SUPPORT_MAILTO}>Falar com a Synap <ArrowRight size={15} /></a> : <button className={plan.featured ? styles.primaryButton : styles.secondaryButton} disabled={checking || isCurrent} onClick={() => navigate(dashboardUrl)} type="button">{isCurrent ? "Plano atual" : "Selecionar plano"}<ArrowRight size={15} /></button>}
+          {plan.key === "PREMIUM" && !isCurrent && SUPPORT_MAILTO ? <a className={styles.secondaryButton} href={SUPPORT_MAILTO}>Falar com a Synap <ArrowRight size={15} /></a> : <button className={plan.featured ? styles.primaryButton : styles.secondaryButton} disabled={checking || isCurrent} onClick={() => navigate(dashboardUrl)} type="button">{isCurrent ? "Plano atual" : "Selecionar plano"}<ArrowRight size={15} /></button>}
         </article>;
       })}
     </section>
-    <section className={styles.footerCard}><div className={styles.footerIcon}><Sparkles size={20} /></div><div><h2>Precisa de ajuda para decidir?</h2><p>A nossa equipa pode recomendar a melhor configuração para a sua rede de farmácias.<span className={styles.supportEmail}>{SUPPORT_EMAIL}</span></p></div><a href={SUPPORT_MAILTO}>Contactar suporte <ArrowRight size={15} /></a></section>
+    {SUPPORT_MAILTO && <section className={styles.footerCard}><div className={styles.footerIcon}><Sparkles size={20} /></div><div><h2>Precisa de ajuda para decidir?</h2><p>A nossa equipa pode recomendar a melhor configuração para a sua rede de farmácias.<span className={styles.supportEmail}>{SUPPORT_EMAIL}</span></p></div><a href={SUPPORT_MAILTO}>Contactar suporte <ArrowRight size={15} /></a></section>}
     <footer className={styles.footer}><Users size={14} /> Os limites de farmácias aplicam-se à empresa; os de utilizadores aplicam-se a cada filial.</footer>
   </main>;
 }

@@ -1,2 +1,2 @@
-export const SUPPORT_EMAIL = "support.logicsynap@gmail.com";
-export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}`;
+export const SUPPORT_EMAIL = "";
+export const SUPPORT_MAILTO = SUPPORT_EMAIL ? `mailto:${SUPPORT_EMAIL}` : "";

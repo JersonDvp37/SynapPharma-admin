@@ -688,7 +688,7 @@ export default function Dashboard() {
         </div>
 
         <section className={styles.renewal}><div className={styles.renewalIntro}><span className={styles.renewalIcon}><ShieldCheck size={24} /></span><div><span className={styles.eyebrow}>CONTINUIDADE DO SEU NEGÓCIO</span><h2>Renovar subscrição</h2><p>Receba o pedido de pagamento no seu telemóvel.</p></div></div><form className={styles.paymentForm} onSubmit={pay}><label>Carteira móvel<select value={provider} onChange={(event) => setProvider(event.target.value as Provider)}><option>M-Pesa</option><option>e-Mola</option></select></label><label>Número de telemóvel<input required inputMode="tel" placeholder="84 123 4567" value={phone} onChange={(event) => setPhone(event.target.value)} /></label><button className={styles.primaryButton} disabled={paying} type="submit">{paying ? "A enviar..." : "Renovar plano"}<ArrowRight size={15} /></button></form>{payError && <p role="alert" className={styles.error}>{payError}</p>}{payMessage && <p role="status" className={styles.good}>{payMessage}</p>}</section>
-        <footer className={styles.footer}><span>Synap Pharma <i /> Gestão que acompanha a sua rede.</span><a href={SUPPORT_MAILTO}><Mail size={12} />{SUPPORT_EMAIL}</a><span><LockKeyhole size={12} /> Dados da sua empresa protegidos</span></footer>
+        <footer className={styles.footer}><span>Synap Pharma <i /> Gestão que acompanha a sua rede.</span>{SUPPORT_MAILTO && <a href={SUPPORT_MAILTO}><Mail size={12} />{SUPPORT_EMAIL}</a>}<span><LockKeyhole size={12} /> Dados da sua empresa protegidos</span></footer>
       </div>
     </main>
   </div>;
